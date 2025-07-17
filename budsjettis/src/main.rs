@@ -4,10 +4,11 @@ mod templates;
 
 use axum::{
     routing::get,
+    routing::delete,
     Router,
 };
 
-use handlers::{home::home_page, expenses::get_expenses, expenses::add_expense};
+use handlers::{home::home_page, expenses::get_expenses, expenses::add_expense, expenses::delete_expense};
 use sqlx::{sqlite::SqlitePool, Pool, Sqlite};
 use std::path::Path;
 
@@ -30,6 +31,7 @@ async fn main() {
     let app = Router::new()
         .route("/", get(home_page))
         .route("/expenses", get(get_expenses).post(add_expense))
+        .route("/expenses/{id}", delete(delete_expense))
         .with_state(pool)
         .into_make_service();
 
