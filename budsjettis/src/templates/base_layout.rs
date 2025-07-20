@@ -1,4 +1,4 @@
-use super::forms::{expense_form, expenses_section};
+use super::forms::{expense_form, expenses_section, charts_section};
 
 pub fn base_layout() -> String {
     format!(r##"
@@ -8,6 +8,7 @@ pub fn base_layout() -> String {
         <title>Budsjettis</title>
         <script src="https://unpkg.com/htmx.org@1.9.10"></script>
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
     <body class="bg-gray-100 min-h-screen">
         <div class="max-w-4xl mx-auto p-6">
@@ -16,8 +17,9 @@ pub fn base_layout() -> String {
             
             {}
             {}
+            {}
         </div>
     </body>
     </html>
-    "##, expense_form(), expenses_section())
+    "##, expense_form(), expenses_section(), charts_section())
 }

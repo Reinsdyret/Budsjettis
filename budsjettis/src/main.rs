@@ -1,6 +1,7 @@
 mod handlers;
 mod models;
 mod templates;
+mod charts;
 
 use axum::{
     routing::get,
@@ -8,7 +9,7 @@ use axum::{
     Router,
 };
 
-use handlers::{home::home_page, expenses::get_expenses, expenses::add_expense, expenses::delete_expense};
+use handlers::{home::home_page, expenses::get_expenses, expenses::add_expense, expenses::delete_expense, expenses::get_expense_chart_by_date, expenses::get_expense_chart_by_category};
 use sqlx::{sqlite::SqlitePool, Pool, Sqlite};
 use std::path::Path;
 
@@ -32,6 +33,8 @@ async fn main() {
         .route("/", get(home_page))
         .route("/expenses", get(get_expenses).post(add_expense))
         .route("/expenses/{id}", delete(delete_expense))
+        .route("/expenses/chart/date", get(get_expense_chart_by_date))
+        .route("/expenses/chart/category", get(get_expense_chart_by_category))
         .with_state(pool)
         .into_make_service();
 

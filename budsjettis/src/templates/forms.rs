@@ -46,3 +46,24 @@ pub fn expenses_section() -> &'static str {
     </div>
     "##
 }
+
+pub fn charts_section() -> &'static str {
+    r##"
+    <div class="bg-white p-6 rounded-lg shadow">
+        <h2 class="text-xl font-semibold mb-4">Grafer og statistikk</h2>
+        <div class="space-x-4 mb-4">
+            <button hx-get="/expenses/chart/date" hx-target="#chart-container"
+                    class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+                Utgifter over tid
+            </button>
+            <button hx-get="/expenses/chart/category" hx-target="#chart-container"
+                    class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
+                Utgifter per kategori
+            </button>
+        </div>
+        <div id="chart-container">
+            <!-- Charts will load here -->
+        </div>
+    </div>
+    "##
+}
